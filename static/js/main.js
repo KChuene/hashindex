@@ -1,3 +1,5 @@
+import "./api.js";
+
 document.querySelector("#add-btn").addEventListener(
     "click", (event) => {
         event.stopPropagation();
@@ -12,7 +14,7 @@ document.querySelector(".popup .close-btn").addEventListener(
 );
 
 document.querySelector("#search-btn").addEventListener(
-    "click", listview
+    "click", get
 )
 
 window.addEventListener(
