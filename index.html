@@ -1,6 +1,8 @@
 <html>
     <head>
         <title>HashIndex | Home</title>
+
+        <link rel="stylesheet" href="./css/main.css">
     </head>
     <body>
         <header>
@@ -27,22 +29,27 @@
             <div class="close-btn">&times;</div>
             <div class="form">
                 <div>
-                    <label for="">Hash</label>
+                    <label for="hash-input">Hash</label>
                     <input type="text" id="hash-input">
                 </div>
                 <div>
-                    <label for="">Passphrase</label>
+                    <label for="phrase-input">Passphrase</label>
                     <input type="text" id="phrase-input">
                 </div>
                 <div>
                     <select name="" id="">
-                        <option value="">md5</option>
-                        <option value="">sha1</option>
-                        <option value="">sha2</option>
+                        <option value="md5">md5</option>
+                        <option value="sha1">sha1</option>
+                        <option value="sha2">sha2</option>
                     </select>
                     <button>Add</button>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="column"></div>
+        </div>
     </body>
+
+    <script src="./js/main.js"></script>
 </html>
