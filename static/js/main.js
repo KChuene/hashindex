@@ -1,6 +1,6 @@
-import "./api.js";
+import {get} from "./api.js";
 
-document.querySelector("#add-btn").addEventListener(
+document.querySelector("#show-popup-btn").addEventListener(
     "click", (event) => {
         event.stopPropagation();
         document.querySelector(".popup").classList.add("active");
@@ -14,12 +14,18 @@ document.querySelector(".popup .close-btn").addEventListener(
 );
 
 document.querySelector("#search-btn").addEventListener(
-    "click", get
-)
+    "click", () => {
+        get(listview);
+    }
+);
+
+document.querySelector("#add-btn").addEventListener(
+    "click", null
+);
 
 window.addEventListener(
     "click", (event) => {
-        popup = document.querySelector(".popup");
+        const popup = document.querySelector(".popup");
 
         if(!popup.contains(event.target)) {
             popup.classList.remove("active");
@@ -27,10 +33,10 @@ window.addEventListener(
     }
 );
 
-function listview() {
-    const row = document.querySelector(".row"); 
+async function listview(result) {
+    var row = document.querySelector(".row"); 
+    var items = result || [];
 
-    items = ["banana", "apple", "mango"];
     items.forEach(elem => {
         const column = document.createElement("div");
         column.classList.add("column");
@@ -38,4 +44,14 @@ function listview() {
         
         row.appendChild(column);
     });
+}
+
+function addnew() {
+    var result = JSON.parse( addnew() );
+    if(result && result.success) {
+        alert(result.message);
+        return;
+    }
+
+    alert("Failed!");
 }

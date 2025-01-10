@@ -1,20 +1,22 @@
 CREATE_TABLE = """
-    CREATE TABLE Rainbow (
+    CREATE TABLE IF NOT EXISTS Rainbow (
         Id INTEGER PRIMARY KEY,
-        Hash TEXT NOT NULL,
-        Phrase TEXT NOT NULL
+        Hash TEXT UNIQUE NOT NULL,
+        Phrase TEXT UNIQUE NOT NULL
     );
 """
 
 CREATE_INDEX = """
-    CREATE INDEX HashIndex ON Rainbow(Hash);
+    CREATE UNIQUE INDEX IF NOT EXISTS HashIndex 
+    ON Rainbow(Hash);
 """
 
 INSERT = """
-    INSERT INTO Rainbow(?, ?);
+    INSERT OR IGNORE INTO Rainbow(Hash, Phrase)
+    VALUES (?, ?);
 """
 
 SELECT = """
-    SELECT Phrase FROM Rainbow
+    SELECT Hash, Phrase FROM Rainbow
     WHERE Hash=?;
 """

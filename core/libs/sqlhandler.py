@@ -1,5 +1,16 @@
 import sqlite3
 
+def singleton(Class):
+    instances = {}
+
+    def create(*args, **kwargs):
+        if not Class in instances:
+            instances[Class] = Class(*args, **kwargs)
+        return instances[Class]
+    
+    return create
+
+@singleton
 class SQLHandler:
     def __init__(self, conn : sqlite3.Connection, commit : bool =True):
         self.conn = conn
