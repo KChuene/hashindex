@@ -1,11 +1,14 @@
 import sys
+import sqlite3
 import core.libs.argshandler as args
 from core.api import app
+from core.libs.sqlhandler import SQLHandler
 
 MODES = ["local", "public"]
 
 def main():
-    pass
+    dbconn = sqlite3.connect("db/hindex.db")
+    sqlh = SQLHandler(dbconn)
 
 if __name__=="__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "local"
