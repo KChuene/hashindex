@@ -11,6 +11,7 @@ def get():
 
 @app.route("/api", methods=["POST"])
 def add():
+    
     result = {
         "success": True,
         "message": "Added successfully!"
