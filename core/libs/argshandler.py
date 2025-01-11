@@ -1,11 +1,12 @@
 import sys
 
-OPTIONS = ["-add", "-get", "-htype"]
+METHODS = ["-add", "-get", ]
+OPTIONS = ["-htype"]
 
 def bye(message : str = "Bye bye!", show_usage : bool = True):
     print(message)
     if show_usage:
-        print("usage: hindex.py [-add <hash> <value> | -get <hash>] <")
+        print("usage: hindex.py [-add -h <hash> -v <value> | -get -h <hash>] <")
 
     sys.exit()
 
