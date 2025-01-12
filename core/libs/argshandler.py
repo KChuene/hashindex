@@ -1,7 +1,18 @@
 import sys
 
 METHODS = ["-add", "-get", ]
-OPTIONS = ["-htype"]
+
+REQ = IS_BOOL = IS_NUM = True
+OPTIONS = {
+    "-add": [
+        ("-htype", REQ, not IS_BOOL, not IS_NUM), 
+        ("-hash", REQ, not IS_BOOL, not IS_NUM), 
+        ("-v", REQ, not IS_BOOL, not IS_NUM)
+    ],
+    "-get": [
+        ("-hash", REQ, not IS_BOOL, not IS_NUM)
+    ]
+}
 
 def bye(message : str = "Bye bye!", show_usage : bool = True):
     print(message)

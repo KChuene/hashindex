@@ -1,7 +1,7 @@
 import sys
 import hashlib
-import libs.qstrings as qr
-from libs.sqlhandler import SQLHandler
+import core.libs.qstrings as qr
+from core.libs.sqlhandler import SQLHandler
 
 def singleton(Class):
     instances = {}
@@ -22,8 +22,8 @@ def singleton(Class):
 
 @singleton
 class Index:
-    def add(hash : str, phrase : str, htype : str):
-        if not htype in hashlib.algorithms_available:
+    def add(self, htype : str, hash : str, phrase : str):
+        if not htype in hashlib.algorithms_guaranteed:
             return False, "Algorithm not supported."
         
         method = getattr(hashlib, htype)
@@ -36,7 +36,5 @@ class Index:
         qhandler.write(qr.INSERT, [hash, phrase])
         return True, "Added."
     
-    def get(hash : str):
+    def get(self, hash : str):
         pass
-
-index = Index()
