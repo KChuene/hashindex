@@ -33,8 +33,17 @@ class Index:
             return False, "Hash does not match phrase."
 
         qhandler = SQLHandler(None)
-        qhandler.write(qr.INSERT, [hash, phrase])
+        qhandler.write(qr.INSERT, (hash, phrase,))
         return True, "Added."
     
     def get(self, hash : str):
-        pass
+        qhandler = SQLHandler(None)
+        result = qhandler.read(qr.SELECT, (hash,))
+
+        if result:
+            return True, {
+                "hash": result[0][0],
+                "phrase": result[0][1]
+            }
+        
+        return False, "Nothing."
