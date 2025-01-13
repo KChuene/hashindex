@@ -1,6 +1,6 @@
 import json
 import os
-from index import Index
+from core.index import Index
 from flask import Flask, jsonify, request, render_template
 
 app = Flask("Hashindex", template_folder="html")

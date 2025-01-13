@@ -10,7 +10,10 @@ MODES = ["local", "public"]
 
 def debugger(cindex : int):
     argstr = [
-        "local -add -htype sha256 -hash 59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6 -v p@55w0rd"
+        "local -add -htype sha256 -hash 59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6 -v p@55w0rd",
+        "local -get -hash 59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6",
+        "local -add -htype sha256 -hash 008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601 -v Password123",
+        "local -get -hash 008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601"
     ]
 
     arglst = argstr[cindex].split(" ")
@@ -63,13 +66,12 @@ def main():
     print(output)
 
 if __name__=="__main__":
-    debugger(0)
+    #debugger(2)
     mode = sys.argv[1] if len(sys.argv) > 1 else "local"
 
     if not mode in MODES: 
         args.bye(f"(!) Only {MODES} modes available.")
 
-    connectdb()
     if mode == "public":
         app.run(host="localhost", port=80, debug=True)
 
