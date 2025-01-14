@@ -37,11 +37,8 @@ async function listview(result) {
     var row = document.querySelector(".row"); 
     var items = result || [];
 
-    items.forEach(elem => {
-        const column = document.createElement("div");
-        column.classList.add("column");
-        column.textContent = elem;
-        
+    items.forEach(element => {
+        const column = lvitem(element);
         row.appendChild(column);
     });
 }
@@ -54,4 +51,10 @@ function addnew() {
     }
 
     alert("Failed!");
+}
+
+function lvitem(content) {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.textContent = content;
 }
