@@ -1,17 +1,18 @@
 const api = "/api";
 
-export function get(handler) {
-    request("GET", null, handler);
+export function get(data, handler) {
+    const url = `${api}?hash=${data}`;
+    request("GET", url, null, handler);
 }
 
 export function add(data, handler) {
-    request("POST", data, handler);
+    request("POST", api, data, handler);
 }
 
-function request(method, data, handler) {
+function request(method, url, data, handler) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open(method, api, true);
+    xhr.open(method, url, true);
     xhr.onreadystatechange = () => {
         var jsonre = null;
         if(xhr.readyState == XMLHttpRequest.DONE) {

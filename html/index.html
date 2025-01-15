@@ -9,8 +9,8 @@
         <header>
             <div class="center">
                 <h1>Hash-Index</h1>
-                <div class="search">
-                    <input type="text" id="search-bx" placeholder="Search for hash">
+                <div id="search-form">
+                    <input type="text" id="search-input" placeholder="Search for hash">
                     <button class="icon-button" id="search-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -28,7 +28,7 @@
         </header>
         <div class="popup">
             <div class="close-btn">&times;</div>
-            <div class="form">
+            <div id="add-form">
                 <div>
                     <label for="hash-input">Hash</label>
                     <input type="text" id="hash-input">
@@ -38,7 +38,7 @@
                     <input type="text" id="phrase-input">
                 </div>
                 <div>
-                    <select name="" id="">
+                    <select name="" id="htype-select">
                         <option value="md5">md5</option>
                         <option value="sha1">sha1</option>
                         <option value="sha2">sha2</option>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="list-view-space">
-            <div class="column">
+            <div class="lv-column">
                 <div class="list-item">
                     <p>59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6</p>
                     <p class="pass-phrase">p@55w0rd</p>
@@ -58,5 +58,6 @@
     </body>
 
     <!--<script src="./js/main.js"></script>-->
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}" type="module"></script>
 </html>

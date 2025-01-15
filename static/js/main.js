@@ -1,27 +1,32 @@
 import {get} from "./api.js";
 
-document.querySelector("#show-popup-btn").addEventListener(
+
+$("#show-popup-btn").on(
     "click", (event) => {
         event.stopPropagation();
-        document.querySelector(".popup").classList.add("active");
+
+        $(".popup").addClass("active");
     }
 );
 
-document.querySelector(".popup .close-btn").addEventListener(
+$(".popup .close-btn").on(
     "click", () => {
-        document.querySelector(".popup").classList.remove("active");
+
+        $(".popup").removeClass("active");
     }
 );
 
-document.querySelector("#search-btn").addEventListener(
+$("#search-btn").on(
     "click", () => {
-        get(search);
+
+        get($("#search-input").val(), search);
     }
 );
 
-document.querySelector("#add-btn").addEventListener(
+$("#add-btn").on(
     "click", () => {
-        add(addnew)
+
+        add(addnew);
     }
 );
 
@@ -35,24 +40,12 @@ window.addEventListener(
     }
 );
 
-async function search(result) {
-    /* Sample: 
-        {"success": bool, 
-         "message": {
-            "hash": str,
-            "phrase": str
-         }
-        }
-    */
-    var row = document.querySelector(".row"); 
-    var objvalid = isvalid(result);
-
-    if(!(result && !objvalid)) {
-        return;
-    } 
-
-    lstitem = item(result); 
-    row.appendChild(lstitem);
+function search(response) {
+    if(response && response.success) {
+        $(".lv-column").append(
+            item(response.message)
+        );
+    }
 }
 
 function addnew() {
@@ -65,21 +58,30 @@ function addnew() {
     alert("Failed!");
 }
 
-function item(content) {
-    const listitem = document.createElement("div");
-    listitem.classList.add("list-item");
-    
-    const hash = document.createElement("p");
-    const phrase = document.createElement("p");
+function item(response) {
+    const lstitem = $("<div>").addClass("list-item")
+        .append(
+            $("<p>").text(response.hash)
+        )
+        .append(
+            $("<p>").addClass("pass-phrase").text(response.phrase)
+        );
 
-    hash.textContent = content.hash;
-    phrase.classList.add("pass-phrase");
-    phrase.textContent = content.phrase;
-
-    listitem.appendChild(hash);
-    listitem.append(phrase);
+    return lstitem;
 }
 
+// SAMPLES
+// 1 - get Response
+    /* Sample: 
+        {"success": bool, 
+         "message": {
+            "hash": str,
+            "phrase": str
+         }
+        }
+    */
+
+// 2 - List Item
 /*
 <div class="list-item">
     <p>59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6</p>
