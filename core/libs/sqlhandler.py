@@ -1,11 +1,13 @@
 import sqlite3
+import os
 
+# Prevent from being created when API starts
 def singleton(Class):
     instances = {}
 
-    def create(*args):
+    def create(commit : bool = True):
         if not Class in instances:
-            instances[Class] = Class(*args)
+            instances[Class] = Class(commit)
 
         return instances[Class]
     
@@ -13,8 +15,11 @@ def singleton(Class):
 
 @singleton
 class SQLHandler:
-    def __init__(self, conn : sqlite3.Connection, commit : bool =True):
-        self.dbconn = conn
+    def __init__(self, commit : bool =True):
+        if not os.path.exists("./db"):
+            os.mkdir("./db")
+
+        self.dbconn = sqlite3.connect("./db/hindex.db", check_same_thread=False)
         self.commit = commit
 
     def write(self, query : str, data : tuple = ()):

@@ -16,11 +16,11 @@ def respond(success : bool, message : str):
 
 @app.route("/api", methods=["GET"])
 def get():
-    data = request.form.to_dict()
+    data = request.args.to_dict()
 
     isvalid = validator.all(data, {"hash"})
     if not isvalid:
-        return jsonify( respond(True, "No valid data provided.") )
+        return jsonify( respond(False, "No valid data provided.") )
     
     indexout = hashindex.get(data["hash"])
     return jsonify( respond(indexout[0], indexout[1]) )

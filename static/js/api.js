@@ -1,28 +1,17 @@
 const api = "/api";
 
 export function get(handler) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", api, true);
-    xhr.onreadystatechange = () => {
-        var jsonre = null;
-        if(xhr.readyState == XMLHttpRequest.DONE) {
-            const status = xhr.status;
-
-            if(status === 0 || (200 <= status && status < 400)) {
-                jsonre = JSON.parse(xhr.responseText);
-            }
-        }
-
-        handler(jsonre);
-    };
-    xhr.send();
+    request("GET", null, handler);
 }
 
 export function add(data, handler) {
+    request("POST", data, handler);
+}
+
+function request(method, data, handler) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", api, true);
+    xhr.open(method, api, true);
     xhr.onreadystatechange = () => {
         var jsonre = null;
         if(xhr.readyState == XMLHttpRequest.DONE) {
@@ -35,5 +24,5 @@ export function add(data, handler) {
 
         handler(jsonre);
     };
-    xhr.send(JSON.stringify(data));
+    xhr.send((data != null) ? JSON.stringify(data) : null);
 }

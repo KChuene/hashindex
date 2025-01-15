@@ -15,12 +15,14 @@ document.querySelector(".popup .close-btn").addEventListener(
 
 document.querySelector("#search-btn").addEventListener(
     "click", () => {
-        get(listview);
+        get(search);
     }
 );
 
 document.querySelector("#add-btn").addEventListener(
-    "click", null
+    "click", () => {
+        add(addnew)
+    }
 );
 
 window.addEventListener(
@@ -33,14 +35,24 @@ window.addEventListener(
     }
 );
 
-async function listview(result) {
+async function search(result) {
+    /* Sample: 
+        {"success": bool, 
+         "message": {
+            "hash": str,
+            "phrase": str
+         }
+        }
+    */
     var row = document.querySelector(".row"); 
-    var items = result || [];
+    var objvalid = isvalid(result);
 
-    items.forEach(element => {
-        const column = lvitem(element);
-        row.appendChild(column);
-    });
+    if(!(result && !objvalid)) {
+        return;
+    } 
+
+    lstitem = item(result); 
+    row.appendChild(lstitem);
 }
 
 function addnew() {
@@ -53,8 +65,24 @@ function addnew() {
     alert("Failed!");
 }
 
-function lvitem(content) {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.textContent = content;
+function item(content) {
+    const listitem = document.createElement("div");
+    listitem.classList.add("list-item");
+    
+    const hash = document.createElement("p");
+    const phrase = document.createElement("p");
+
+    hash.textContent = content.hash;
+    phrase.classList.add("pass-phrase");
+    phrase.textContent = content.phrase;
+
+    listitem.appendChild(hash);
+    listitem.append(phrase);
 }
+
+/*
+<div class="list-item">
+    <p>59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6</p>
+    <p class="pass-phrase">p@55w0rd</p>
+</div>
+*/

@@ -7,18 +7,11 @@ from core.libs.sqlhandler import SQLHandler
 def singleton(Class):
     instances = {}
 
-    def connectdb():
-        if not os.path.exists("./db"):
-            os.mkdir("./db")
-
-        dbconn = sqlite3.connect("./db/hindex.db")
-        return SQLHandler(dbconn)
-
     def createdb(query : str, qhandler : SQLHandler):
         qhandler.write(query)
 
     def getinstance():
-        qhandler = connectdb()
+        qhandler = SQLHandler()
 
         if not Class in instances:
             instances[Class] = Class(qhandler)
