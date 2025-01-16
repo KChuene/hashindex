@@ -20,6 +20,7 @@ $("#search-btn").on(
     "click", () => {
 
         get($("#search-input").val(), search);
+        reset("search");
     }
 );
 
@@ -35,12 +36,20 @@ $("#add-btn").on(
     }
 );
 
+$("#hash-input").on("focus", function() { 
+    $(this).val("")
+});
+$("#phrase-input").on("focus", function() { 
+    $(this).val("")
+});
+
 window.addEventListener(
     "click", (event) => {
         const popup = document.querySelector(".popup");
 
         if(!popup.contains(event.target)) {
             popup.classList.remove("active");
+            reset("add");
         }
     }
 );
@@ -57,11 +66,11 @@ function addnew(response) {
     
     if(response) {
         if(response.success) {
-            alert(response.message);
+            $("#add-response").text(response.message);
             return;
         }
 
-        alert(response.message);
+        $("#add-response").text(response.message);
     }
 }
 
@@ -75,6 +84,20 @@ function item(response) {
         );
 
     return lstitem;
+}
+
+function reset(field) {
+    const handler = {
+        search: () => $("#search-input").val(null),
+        add: () => {
+            $("#hash-input").val("");
+            $("#phrase-input").val("");
+        }
+    };
+
+    if(handler[field]) { 
+        handler[field](); 
+    }
 }
 
 // SAMPLES
