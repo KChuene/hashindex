@@ -31,17 +31,17 @@
             <div id="add-form">
                 <div>
                     <label for="hash-input">Hash</label>
-                    <input type="text" id="hash-input">
+                    <input class="add-input" type="text" name="hash" id="hash-input">
                 </div>
                 <div>
                     <label for="phrase-input">Passphrase</label>
-                    <input type="text" id="phrase-input">
+                    <input class="add-input" type="text" name="phrase" id="phrase-input">
                 </div>
                 <div>
-                    <select name="" id="htype-select">
+                    <select class="add-input" name="htype" id="htype-select">
                         <option value="md5">md5</option>
                         <option value="sha1">sha1</option>
-                        <option value="sha2">sha2</option>
+                        <option value="sha256">sha256</option>
                     </select>
                     <button id="add-btn">Add</button>
                 </div>
@@ -49,10 +49,6 @@
         </div>
         <div class="list-view-space">
             <div class="lv-column">
-                <div class="list-item">
-                    <p>59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6</p>
-                    <p class="pass-phrase">p@55w0rd</p>
-                </div>
             </div>
         </div>
     </body>

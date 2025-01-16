@@ -1,4 +1,4 @@
-import {get} from "./api.js";
+import {get, add} from "./api.js";
 
 
 $("#show-popup-btn").on(
@@ -25,8 +25,13 @@ $("#search-btn").on(
 
 $("#add-btn").on(
     "click", () => {
+        const data = {
+            hash: $("#hash-input").val(),
+            phrase: $("#phrase-input").val(),
+            htype: $("#htype-select").val()
+        };
 
-        add(addnew);
+        add(data, addnew);
     }
 );
 
@@ -48,14 +53,16 @@ function search(response) {
     }
 }
 
-function addnew() {
-    var result = JSON.parse( addnew() );
-    if(result && result.success) {
-        alert(result.message);
-        return;
-    }
+function addnew(response) {
+    
+    if(response) {
+        if(response.success) {
+            alert(response.message);
+            return;
+        }
 
-    alert("Failed!");
+        alert(response.message);
+    }
 }
 
 function item(response) {

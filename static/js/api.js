@@ -11,8 +11,14 @@ export function add(data, handler) {
 
 function request(method, url, data, handler) {
     var xhr = new XMLHttpRequest();
-
     xhr.open(method, url, true);
+
+    if(data) {
+        xhr.setRequestHeader(
+            "Content-type", "application/json"
+        );
+    }
+
     xhr.onreadystatechange = () => {
         var jsonre = null;
         if(xhr.readyState == XMLHttpRequest.DONE) {
