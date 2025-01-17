@@ -1,10 +1,14 @@
 body {
     font-family: monospace;
+    margin: 0;
 }
+
+/* START: STYLING FOR HEADER */
 
 header {
     margin: 0;
     height: 50%;
+    width: 100%;
 
     background-color: #191A19;
 }
@@ -17,11 +21,12 @@ header {
 h1#title {
     color: white;
     font-size: 75px;
+
+    text-align: center;
 }
 
 #search-form {
     height: 50px;
-    width: 420px;
     padding: 15px 10px;
 
     background-color: white;
@@ -29,7 +34,11 @@ h1#title {
 }
 
 #search-input {
+    color: #727D73; 
+
     padding: 10px;
+    width: 300px;
+
     outline: none;
     border: none;
 }
@@ -58,16 +67,87 @@ h1#title {
     background-color: #00712D;
 }
 
+/* END: STYLING FOR HEADER */
+
+/* START: STYLING FOR POPUP */
+
 .popup {
     display: none;
+
+    border-radius: 5px;
+    padding: 15px 25px;
+
     position: absolute;
     z-index: 1;
 }
 
 .popup.active {
-    display: block;
+    display: flex;
 }
 
 .close-btn {
     cursor: pointer;
 }
+
+#add-form div > * {
+    margin-bottom: 10px;
+}
+
+.add-input {
+    color: #727D73; 
+    outline-color: #00712D;
+
+    padding: 10px;
+    width: 250px;
+
+    display: block;
+}
+
+#htype-select {
+    width: 75px;
+    display: inline-block;
+}
+
+#add-form #add-btn {
+    padding: 8px 25px;
+
+    color: white;
+    background-color: #00712D;
+
+    border-radius: 2px;
+}
+
+/* END: STYLING FOR POPUP */
+
+/* START: STYLING FOR LISTVIEW */
+
+.lv-column {
+    margin-top: 15px;
+}
+
+.lv-column > * {
+    margin-top: 10px;
+}
+
+.list-item {
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px #727D73;
+}
+
+.found-hash {
+    font-size: large;
+}
+
+.pass-phrase {
+    font-size: 15px;
+
+    background-color: #D9DFC6;
+
+    padding: 3px 8px;
+    border-radius: 2px;
+
+    display: inline-block;
+}
+
+/* END: STYLING FOR LISTVIEW */

@@ -77,7 +77,7 @@ function addnew(response) {
 function item(response) {
     const lstitem = $("<div>").addClass("list-item")
         .append(
-            $("<p>").text(response.hash)
+            $("<p>").addClass("found-hash").text(response.hash)
         )
         .append(
             $("<p>").addClass("pass-phrase").text(response.phrase)
