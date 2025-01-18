@@ -77,8 +77,13 @@ h1#title {
     border-radius: 5px;
     padding: 15px 25px;
 
-    position: absolute;
+    position: absolute; 
+    top: 40%;
+    left: 40%; /*Move to center*/
     z-index: 1;
+
+    background-color: white;
+    box-shadow: 0px 0px 2px #727D73;
 }
 
 .popup.active {
@@ -86,11 +91,23 @@ h1#title {
 }
 
 .close-btn {
+    position: absolute; /*Position relative to nearest ancestor (ie. Popup)*/
+    top: 10px;
+    right: 10px;
+
+    color: white;
+    background-color: #00712D;
+    text-align: center;
+
+    width: 15px;
+    height: 16px;
     cursor: pointer;
+
+    border-radius: 8px;
 }
 
-#add-form div > * {
-    margin-bottom: 10px;
+#add-form div input {
+    margin: 10px 0px;
 }
 
 .add-input {
@@ -104,7 +121,7 @@ h1#title {
 }
 
 #htype-select {
-    width: 75px;
+    width: 100px;
     display: inline-block;
 }
 
@@ -115,6 +132,14 @@ h1#title {
     background-color: #00712D;
 
     border-radius: 2px;
+}
+
+h4#add-response {
+    padding: 5px 10px;
+    height: 18px;
+    
+    color: #00712D;
+    text-align: center;
 }
 
 /* END: STYLING FOR POPUP */
