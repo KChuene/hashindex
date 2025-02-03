@@ -49,8 +49,9 @@ window.addEventListener(
 
         if(!popup.contains(event.target)) {
             popup.classList.remove("active");
-            reset("add");
+            reset("addin");
         }
+        reset("addout");
     }
 );
 
@@ -89,9 +90,12 @@ function item(response) {
 function reset(field) {
     const handler = {
         search: () => $("#search-input").val(null),
-        add: () => {
+        addin: () => {
             $("#hash-input").val("");
             $("#phrase-input").val("");
+        },
+        addout: () => {
+            $("#add-response").text("")
         }
     };
 
