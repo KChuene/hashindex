@@ -60,14 +60,14 @@ def main():
     print(output)
 
 if __name__=="__main__":
-    debugger(4)
+    #debugger(4)
     mode = sys.argv[1] if len(sys.argv) > 1 else "local"
 
     if not mode in MODES: 
         args.bye(f"(!) Only {MODES} modes available.")
 
     if mode == "public":
-        app.run(host="192.168.56.1", port=8080, debug=True)
+        app.run(host="localhost", port=80, debug=True)
 
     else:
         main()

@@ -18,6 +18,15 @@ $(".popup .close-btn").on(
 
 $("#search-btn").on(
     "click", () => {
+        const lookup = $("#search-input").val();
+        if(lookups.has(hash)) {
+            search({
+                hash: lookup, 
+                phrase: lookups.get(hash),
+                success: true
+            });
+            return;
+        }
 
         get($("#search-input").val(), search);
         reset("search");
@@ -55,8 +64,12 @@ window.addEventListener(
     }
 );
 
+const lookups = new Map()
+
 function search(response) {
     if(response && response.success) {
+        localize(response);
+
         $(".lv-column").append(
             item(response.message)
         );
@@ -64,7 +77,6 @@ function search(response) {
 }
 
 function addnew(response) {
-    
     if(response) {
         if(response.success) {
             $("#add-response").text(response.message);
@@ -72,6 +84,14 @@ function addnew(response) {
         }
 
         $("#add-response").text(response.message);
+    }
+}
+
+function localize(response) {
+    if(response) {
+        // Delete & Add anew if exists
+        lookups.delete(response.hash); 
+        lookups.set(response.hash, response.phrase);
     }
 }
 
