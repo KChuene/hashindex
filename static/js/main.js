@@ -64,7 +64,8 @@ window.addEventListener(
     }
 );
 
-const lookups = new Map()
+const lookups = new Map();
+const MAX_BSIZE = 10;
 
 function search(response) {
     if(response && response.success) {
@@ -90,7 +91,15 @@ function addnew(response) {
 function localize(response) {
     if(response) {
         // Delete & Add anew if exists
-        lookups.delete(response.hash); 
+        if(lookups.has(response.hash)) {
+            lookups.delete(response.hash); 
+        } 
+        else 
+        if(lookups.size >= MAX_BSIZE) {
+            lookups.delete(
+                lookups.keys().next().value
+            );
+        }
         lookups.set(response.hash, response.phrase);
     }
 }

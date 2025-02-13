@@ -167,6 +167,23 @@ h4#add-response {
     background-color: white;
 }
 
+.lv-nothing img {
+    display: block;
+    width: 250px;
+    height: 250px;
+    justify-self: center;
+}
+
+div.lv-nothing h2 {
+    text-align: center;
+}
+
+.lv-nothing  a {
+    display: block;
+    text-align: center;
+    color: #00712D;
+}
+
 .lv-column > * {
     margin-top: 10px;
 }
