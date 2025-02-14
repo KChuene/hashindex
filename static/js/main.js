@@ -1,5 +1,9 @@
 import {get, add} from "./api.js";
 
+// Show nothing here in list view after page is loaded
+$(document).ready(
+    show(null) 
+); 
 
 $("#show-popup-btn").on(
     "click", (event) => {
@@ -18,11 +22,12 @@ $(".popup .close-btn").on(
 
 $("#search-btn").on(
     "click", () => {
-        const lookup = $("#search-input").val();
-        if(lookups.has(hash)) {
-            search({
-                hash: lookup, 
-                phrase: lookups.get(hash),
+        const lhash = $("#search-input").val();
+        if(lookups.has(lhash)) {
+            search({message: {
+                    hash: lhash, 
+                    phrase: lookups.get(lhash),
+                },
                 success: true
             });
             return;
@@ -70,8 +75,7 @@ const MAX_BSIZE = 10;
 function search(response) {
     if(response && response.success) {
         localize(response);
-
-        $(".lv-column").append(
+        show(
             item(response.message)
         );
     }
@@ -100,7 +104,24 @@ function localize(response) {
                 lookups.keys().next().value
             );
         }
-        lookups.set(response.hash, response.phrase);
+
+        const message = response.message
+        lookups.set(message.hash, message.phrase);
+    }
+}
+
+function show(item) {
+    if(!item) {
+        $(".lv-column").html(
+            noitem()
+        );
+    }
+    else
+    if(lookups.size === 0) {
+        $(".lv-column").html(item); 
+    }
+    else {
+        $(".lv-column").prepend(item);
     }
 }
 
@@ -114,6 +135,30 @@ function item(response) {
         );
 
     return lstitem;
+}
+
+function noitem() {
+    const notice = $("<div>").addClass("lv-nothing")
+        .append(
+            $("<img>", {
+                src: "/static/images/planet.png",
+                alt: "#"
+            })
+        )
+        .append(
+            $("<h2>").text("Nothing here!")
+        )
+        .append(
+            $("<a>", {
+                href: "https://www.flaticon.com/free-icons/empty-state",
+                title: "empty state icons",
+                css: {
+                    "font-size": "x-small"
+                },
+                text: "by andinur - Flaticon"
+            })
+        );
+    return notice;
 }
 
 function reset(field) {
@@ -149,5 +194,18 @@ function reset(field) {
 <div class="list-item">
     <p>59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6</p>
     <p class="pass-phrase">p@55w0rd</p>
+</div>
+*/
+
+// 3 - Empty Listview
+/*
+<div class="lv-nothing">
+    <img src="{{ url_for('static', filename='images/planet.png')}}" alt="#">
+    <h2>
+        Nothing here!
+    </h2>
+
+    <!--<a href="https://www.flaticon.com/free-icons/empty-state" title="empty state icons">Empty state icons created by andinur - Flaticon</a>-->
+    <a href="https://www.flaticon.com/free-icons/empty-state" title="empty state icons" style="font-size: x-small;">by andinur - Flaticon</a>
 </div>
 */
