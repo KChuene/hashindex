@@ -17,7 +17,9 @@ OPTIONS = {
 def bye(message : str = "Bye bye!", show_usage : bool = True):
     print(message)
     if show_usage:
-        print("usage: hindex.py [-add -h <hash> -v <value> | -get -h <hash>] <")
+        print("\nUsage:")
+        print("\thindex.py web")
+        print("\thindex.py console [-add -h <hash> -v <value> | -get -h <hash>]")
 
     sys.exit()
 

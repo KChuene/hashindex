@@ -1,5 +1,11 @@
 import {get, add} from "./api.js";
 
+const lookups = new Map([
+    ["59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6", "p@55w0rd"]
+]);
+const MAX_BSIZE = 10;
+var isout_rst = true;
+
 // Show nothing here in list view after page is loaded
 $(document).ready(
     show(null) 
@@ -25,7 +31,7 @@ $("#search-btn").on(
         const lhash = $("#search-input").val();
         if(lookups.has(lhash)) {
             search({message: {
-                    hash: lhash, 
+                    hash: fetchkey(lhash), 
                     phrase: lookups.get(lhash),
                 },
                 success: true
@@ -69,15 +75,13 @@ window.addEventListener(
     }
 );
 
-const lookups = new Map();
-const MAX_BSIZE = 10;
-
 function search(response) {
     if(response && response.success) {
         localize(response);
         show(
-            item(response.message)
-        );
+            item(response.message),
+            true 
+        ); // true = localized
     }
 }
 
@@ -111,18 +115,44 @@ function localize(response) {
 }
 
 function show(item) {
-    if(!item) {
+    const lsize = (lookups)? lookups.size: 0;
+    cleardup( (item)? item.attr("id"): null);
+
+    if(!item || lsize === 0) {
+        // item == null is for output reset
         $(".lv-column").html(
             noitem()
         );
+        isout_rst = true;
     }
     else
-    if(lookups.size === 0) {
+    if(isout_rst) {
         $(".lv-column").html(item); 
+        isout_rst = false;
     }
     else {
+        // assuming size >= 0 always
         $(".lv-column").prepend(item);
+        isout_rst = false;
     }
+}
+
+function cleardup(id) {
+    if(id) {
+        const elem = $(`#${id}`);
+        if(elem) {
+            elem.remove();
+        }
+    }
+}
+
+function fetchkey(hkey) {
+    for(const [key, value] of lookups) {
+        if(key === hkey) {
+            return key;
+        }
+    }
+    return null;
 }
 
 function item(response) {
@@ -132,7 +162,8 @@ function item(response) {
         )
         .append(
             $("<p>").addClass("pass-phrase").text(response.phrase)
-        );
+        )
+        .attr("id", response.hash);
 
     return lstitem;
 }

@@ -6,7 +6,7 @@ from core.api import app
 from core.index import Index
 from core.libs.sqlhandler import SQLHandler
 
-MODES = ["local", "public"]
+MODES = ["console", "web"]
 
 def debugger(cindex : int):
     argstr = [
@@ -61,12 +61,12 @@ def main():
 
 if __name__=="__main__":
     #debugger(4)
-    mode = sys.argv[1] if len(sys.argv) > 1 else "local"
+    mode = sys.argv[1] if len(sys.argv) > 1 else "console"
 
     if not mode in MODES: 
         args.bye(f"(!) Only {MODES} modes available.")
 
-    if mode == "public":
+    if mode == "web":
         app.run(host="localhost", port=80, debug=True)
 
     else:
