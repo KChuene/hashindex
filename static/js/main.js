@@ -1,7 +1,8 @@
 import {get, add} from "./api.js";
 
 const lookups = new Map([
-    ["59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6", "p@55w0rd"]
+    ["59f46bb90cffb0ed7c7e5db58bb300f3bcd714f51ae723ed91b06a3e13d4d5b6", "p@55w0rd"],
+    ["008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601", "Password123"]
 ]);
 const MAX_BSIZE = 10;
 var isout_rst = true;
