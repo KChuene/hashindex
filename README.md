@@ -15,7 +15,7 @@ python3 hindex.py console [-get <hash> | -add -hash <hash> -v <passphrase>]
 - **`-get`:** Look up a hash's passphrase.
 - **`-add`:** Index a new hash-passphrase pair.
 - **`-htype`:** Hashing algorith used for the new entry.
-- **`-hash`:** New hash to index.
+- **`-hash`:** New hash to index (`-add`) or hash to lookup (`-get`).
 - **`-v`:** New hash's plaintext value.
 
 ## Usage Examples
@@ -25,7 +25,7 @@ python3 hindex.py web
 ```
 **Runing the console app:**
 ```
-python3 hindex.py console -get '008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601'
+python3 hindex.py console -get -hash '008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601'
 ```
 ```
 python3 hindex.py console -add -htype 'sha256' -hash '008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601' -v 'Password123'
