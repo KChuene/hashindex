@@ -19,7 +19,7 @@ def bye(message : str = "Bye bye!", show_usage : bool = True):
     if show_usage:
         print("\nUsage:")
         print("\thindex.py web")
-        print("\thindex.py console [-add -h <hash> -v <value> | -get -h <hash>]")
+        print("\thindex.py console [-add -htype <algo> -hash <hash> -v <value> | -get -hash <hash>]")
 
     sys.exit()
 
