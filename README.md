@@ -9,7 +9,7 @@ A python script and desktop website for indexing and querying password hashes.
 ## General Usage
 **Console App:**
 ```
-python3 hindex.py console [-get <hash> | -add -hash <hash> -v <passphrase>]
+python3 hindex.py console [-get -hash <hash> | -add -hash <hash> -v <passphrase>]
 ```
 **Options:**
 - **`-get`:** Look up a hash's passphrase.
